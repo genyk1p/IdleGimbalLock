@@ -2,6 +2,8 @@
 
 Engine gimbals stay neutral while their engine gives no thrust.
 
+Forum thread: https://forum.kerbalspaceprogram.com/topic/231949-112x-idle-gimbal-lock-010-engine-gimbals-stay-neutral-while-the-engine-is-off/
+
 ## The problem
 
 Stock `ModuleGimbal` turns the nozzles after the pitch/yaw/roll input every physics step, whether or not its engine is burning. A nozzle without thrust gives no torque, so this does nothing useful, but it is not harmless: the gimbal's response speed is multiplied by the physics step (`gimbalResponseSpeed * TimeWarp.fixedDeltaTime`), so under physics warp the nozzles follow every twitch of the attitude controller at once. With heavy gimballed parts the vessel shakes and can get into resonance. Seen with the KSP Interstellar Extended Nuclear Lightbulb, whose gimbal moves the whole reactor (`gimbalTransformName = Reactor`), while MechJeb turned the vessel at 4x.
