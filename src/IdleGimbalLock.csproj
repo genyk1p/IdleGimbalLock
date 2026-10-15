@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <AssemblyName>IdleGimbalLock</AssemblyName>
+    <RootNamespace>IdleGimbalLock</RootNamespace>
+    <Version>0.1.0</Version>
+    <Product>IdleGimbalLock</Product>
+    <Description>Engine gimbals stay neutral while their engine gives no thrust.</Description>
+    <Copyright>MIT License</Copyright>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <DebugType>portable</DebugType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <!-- The built DLL goes straight into the release layout. -->
+    <OutputPath>..\GameData\IdleGimbalLock\Plugins\</OutputPath>
+  </PropertyGroup>
+
+  <!-- KSP install: override with the KSPDIR environment variable or /p:KSPDIR=... -->
+  <PropertyGroup>
+    <KSPDIR Condition="'$(KSPDIR)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Kerbal Space Program</KSPDIR>
+    <KSPManaged>$(KSPDIR)\KSP_x64_Data\Managed</KSPManaged>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <!-- Compile-time references only: nothing from here is copied to the output. -->
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(KSPManaged)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(KSPManaged)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(KSPManaged)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(KSPDIR)\GameData\000_Harmony\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
